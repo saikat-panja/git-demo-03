@@ -98,3 +98,5 @@ see [this article](https://medium.com/@ashleydavis75/node-js-memory-limitations-
 
 Keep in mind that this project only uses node to build the angular application.
 There is no production dependency on node.
+---
+updating README.md
