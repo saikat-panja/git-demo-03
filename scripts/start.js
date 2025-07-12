@@ -1,14 +1,12 @@
 const concurrently = require('concurrently');
-const upath = require('upath');
-
-const browserSyncPath = upath.resolve(upath.dirname(__filename), '../node_modules/.bin/browser-sync');
+const port = process.env.PORT || 4200;
 
 concurrently([
-    { command: 'node scripts/sb-watch.js', name: 'SB_WATCH', prefixColor: 'bgBlue.bold' },
+    { command: 'node scripts/pug-watch.js', name: 'PUG_WATCH', prefixColor: 'bgGreen.bold' },
     { 
-        command: `"${browserSyncPath}" --reload-delay 2000 --reload-debounce 2000 dist -w --no-online`,
-        name: 'SB_BROWSER_SYNC', 
-        prefixColor: 'bgGreen.bold',
+        command: `npm run ng -- serve --port ${port} --open`,
+        name: 'NG_SERVE', 
+        prefixColor: 'bgBlue.bold',
     }
 ], {
     prefix: 'name',

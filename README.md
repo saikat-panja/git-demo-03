@@ -1,73 +1,100 @@
-# [Start Bootstrap - SB Admin](https://startbootstrap.com/template/sb-admin/)
+# SB Admin Angular
 
-[SB Admin](https://startbootstrap.com/template/sb-admin/) is an open source, admin dashboard template for [Bootstrap](https://getbootstrap.com/) created by [Start Bootstrap](https://startbootstrap.com/).
+SB Admin Angular is a free and open-sourced Bootstrap themed Angular 9 starter project.
 
-## Preview
+It shares the same project structure and subset of tooling from our professional offering,
+[SB Admin Pro Angular](https://themes.startbootstrap.com/sb-admin-pro-angular/),
+so much of the [SB Admin Pro Angular Documentation](https://docs.startbootstrap.com/sb-admin-pro-angular/quickstart) is applicable.
 
-[![SB Admin Preview](https://assets.startbootstrap.com/img/screenshots/templates/sb-admin.png)](https://startbootstrap.github.io/startbootstrap-sb-admin/)
+In particular the documentation for [Structure](https://docs.startbootstrap.com/sb-admin-pro-angular/structure-root-level),
+and the documentation for [SBPro Schematics](https://docs.startbootstrap.com/sb-admin-pro-angular/development-general#sb-pro-schematics)
 
-**[View Live Preview](https://startbootstrap.github.io/startbootstrap-sb-admin/)**
+SB Admin Angular comes with a base implementation of navigation and layouts.
 
-## Status
+For professionally designed components (including an advanced SideNav), 100% code coverage,
+starter cypress tests and more, please consider our professional offering:
+[SB Admin Pro Angular](https://themes.startbootstrap.com/sb-admin-pro-angular/)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/StartBootstrap/startbootstrap-sb-admin/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/startbootstrap-sb-admin.svg)](https://www.npmjs.com/package/startbootstrap-sb-admin)
+## Quick Start
 
-## Download and Installation
+```bash
+git clone git@github.com:startbootstrap/sb-admin-angular.git
+cd sb-admin-angular
+npm install
+npm start
+```
 
-To begin using this template, choose one of the following options to get started:
+`npm start` should open a browser window to <http://localhost:4200>
 
-* [Download the latest release on Start Bootstrap](https://startbootstrap.com/template/sb-admin/)
-* Install via npm: `npm i startbootstrap-sb-admin`
-* Clone the repo: `git clone https://github.com/StartBootstrap/startbootstrap-sb-admin.git`
-* [Fork, Clone, or Download on GitHub](https://github.com/StartBootstrap/startbootstrap-sb-admin)
+By default angular runs on port 4200. To change this port you can run:
 
-## Usage
+```bash
+# This starts the development server on port 4205,
+# but you can use any port you'd like
+export PORT=4205 && npm start
+```
 
-### Basic Usage
+## Tests
 
-After downloading, simply edit the HTML and CSS files included with `dist` directory. These are the only files you need to worry about, you can ignore everything else! To preview the changes you make to the code, you can open the `index.html` file in your web browser.
+### Unit Tests
 
-### Advanced Usage
+```bash
+npm run test
+```
 
-Clone the source files of the theme and navigate into the theme's root directory. Run `npm install` and then run `npm start` which will open up a preview of the template in your default browser, watch for changes to core template files, and live reload the browser when changes are saved. You can view the `package.json` file to see which scripts are included.
+### e2e
 
-#### npm Scripts
+```bash
+npm run e2e
+```
 
-* `npm run build` builds the project - this builds assets, HTML, JS, and CSS into `dist`
-* `npm run build:assets` copies the files in the `src/assets/` directory into `dist`
-* `npm run build:pug` compiles the Pug located in the `src/pug/` directory into `dist`
-* `npm run build:scripts` brings the `src/js/scripts.js` file into `dist`
-* `npm run build:scss` compiles the SCSS files located in the `src/scss/` directory into `dist`
-* `npm run clean` deletes the `dist` directory to prepare for rebuilding the project
-* `npm run start:debug` runs the project in debug mode
-* `npm start` or `npm run start` runs the project, launches a live preview in your default browser, and watches for changes made to files in `src`
+## Production
 
-You must have npm installed in order to use this build environment.
+SB Admin Angular come with a production ready Dockerfile and build scripts.
 
-## Bugs and Issues
+You can get Docker [here](https://www.docker.com/get-started)
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/StartBootstrap/startbootstrap-sb-admin/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](https://startbootstrap.com/template/sb-admin/).
+```bash
+npm run docker:build
+npm run docker:run
+```
 
-## Custom Builds
+## Generate Code
 
-You can hire Start Bootstrap to create a custom build of any template, or create something from scratch using Bootstrap. For more information, visit the **[custom design services page](https://startbootstrap.com/bootstrap-design-services/)**.
+```bash
+npm run generate:module -- --path src/modules --name Test
+npm run generate:component -- --path src/modules/test/containers --name Test
+npm run generate:component -- --path src/modules/test/components --name Test
+npm run generate:directive -- --path src/modules/test/directives --name Test
+npm run generate:service -- --path src/modules/test/services --name Test
+```
 
-## About
+_Note: Creating a Component and a Container use the same command,
+the difference is just the paths and how they are used._
 
-Start Bootstrap is an open source library of free Bootstrap templates and themes. All of the free templates and themes on Start Bootstrap are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
+### MVCC
 
-* <https://startbootstrap.com>
-* <https://twitter.com/SBootstrap>
+Containers and Components are both Angular Components, but used in different ways.
 
-Start Bootstrap was created by and is maintained by **[David Miller](https://davidmiller.io/)**.
+Containers should arrange Components.
 
-* <https://davidmiller.io>
-* <https://twitter.com/davidmillerhere>
-* <https://github.com/davidtmiller>
+Obviously this can become subjective, but MVCC is the paradigm that we subscribe to.
 
-Start Bootstrap is based on the [Bootstrap](https://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
+## Troubleshooting
 
-## Copyright and License
+### npm start
 
-Copyright 2013-2023 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE) license.
+If you receive memory issues adjust
+`max_old_space_size` in the `ng` command of the `package.json`:
+
+```json
+"ng": "cross-env NODE_OPTIONS=--max_old_space_size=2048 ./node_modules/.bin/ng",
+```
+
+You can adjust 2048 to any number you need.
+
+For more information about why you may need `--max_old_space_size`
+see [this article](https://medium.com/@ashleydavis75/node-js-memory-limitations-30d3fe2664c0).
+
+Keep in mind that this project only uses node to build the angular application.
+There is no production dependency on node.
