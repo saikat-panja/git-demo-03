@@ -1,6 +1,6 @@
 FROM nginx:1.17.6
 
-EXPOSE 80
+EXPOSE 8080
 
 RUN echo "deb http://security.debian.org/debian-security stretch/updates main" > /etc/apt/sources.security.only.list
 RUN apt-get -y update -o Dir::Etc::SourceList=/etc/apt/sources.security.only.list -o Dir::Etc::Parts=/dev/null
